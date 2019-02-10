@@ -41,7 +41,7 @@ def XO():
 
 
 def FirstPlay():
-	# Randomly chooses whther player or computer goes first
+	# Randomly chooses whether player or computer goes first
 	x = random.randint(1,2)
 	if(x == 1):
 		return 'player'
@@ -61,15 +61,14 @@ def CheckWin(board, choice):
 
 
 def CompMove(board, cchoice, pchoice):
-	# The computer moves based on the following criteria in order
+	# The moves that the computer performs are based on the following criteria in order
 	# 1. Checks if it can win in the next turn and does that move
-	# 2.  If not then Checks whether the player can win in the next turn and blocks them
+	# 2. If not then Checks whether the player can win in the next turn and blocks them
 	# 3. Else it checks available corners and randomly occupies one of them
 	# 4. Else it checks whether the center is empty and occupies that.
 	# 4. Else it checks for an available side and randomly occupies one.
-	# 5. Else it return none.
+	# 5. Else it returns none.
 
-	print("\n\n  Computer's Move")
 	dup_list = board.copy() #Duplicate list of the board so that the computer can perform the available moves 
 							# and check whether it or the player can win. 
 
@@ -141,11 +140,11 @@ while(True):
 	print("  You are {}. Computer is {}.".format(pchoice, cchoice))
 	play = FirstPlay()
 	print("\n\n  {} goes first.".format(play.capitalize()))
-	t = 0
-	while(t<10):
+	while(True):
 		if(play == 'computer'):
 			move = CompMove(board, cchoice, pchoice)
 			if(move):
+				print("\n\n  Computer's Move")
 				board[move] = cchoice
 				printBoard(board)
 				if(CheckWin(board, cchoice)):
@@ -153,9 +152,7 @@ while(True):
 					break
 			else:
 				print("\n\n  Match Tied.")
-				t = 11
 			play = 'player'
-			t += 1
 		else:
 			move = PlayerMove(board, pchoice)
 			if(move):
@@ -166,10 +163,8 @@ while(True):
 					break
 			else:
 				print("\n\n  Match Tied.")
-				t = 11
 				break
 			play = 'computer'
-			t += 1
 
 
 
